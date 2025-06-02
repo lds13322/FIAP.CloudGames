@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "ufdc21r4EED+JjnF47hfgLxwFygykFYZ1/nhV1SajuI=",
+  "Source": "FIAP.CloudGames.WebApi",
+  "BasePath": "_content/FIAP.CloudGames.WebApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
