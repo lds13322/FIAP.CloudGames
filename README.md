@@ -56,8 +56,8 @@ API REST para um sistema de jogos digitais, onde usuários podem:
 POST /api/users/register
 {
   "name": "Lucas",
-  "email": "lucas@email.com",
-  "password": "123456",
+  "email": "",
+  "password": "",
   "role": "Admin"
 }
 ```
@@ -66,8 +66,8 @@ POST /api/users/register
 ```json
 POST /api/users/login
 {
-  "email": "lucas@email.com",
-  "password": "123456"
+  "email": "",
+  "password": ""
 }
 ```
 
