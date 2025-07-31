@@ -1,0 +1,9 @@
+# Ignorar pastas de compilação e debug
+**/bin
+**/obj
+
+# Ignorar arquivos específicos do ambiente de desenvolvimento
+.vs
+.vscode
+*.suo
+*.user
