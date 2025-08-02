@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FIAP.CloudGames.WebApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+78d477377bd41549c6f90dc837a174399a3c1fcd")]
 [assembly: System.Reflection.AssemblyProductAttribute("FIAP.CloudGames.WebApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FIAP.CloudGames.WebApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

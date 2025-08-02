@@ -41,27 +41,27 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 var app = builder.Build();
-// Garante que o banco de dados seja criado/atualizado de forma assíncrona
-//async Task CreateDbIfNotExists(IHost host)
-//{
-  //  using (var scope = host.Services.CreateScope())
-    //{
-      //  var services = scope.ServiceProvider;
-        //try
-        //{
-          //  var context = services.GetRequiredService<AppDbContext>();
-           // await context.Database.MigrateAsync();
-        //}
-        //catch (Exception ex)
-        //{
-         //   var logger = services.GetRequiredService<ILogger<Program>>();
-          //  logger.LogError(ex, "An error occurred creating the DB.");
-        //}
-   // }
-//}
+ // Garante que o banco de dados seja criado/atualizado de forma assíncrona
+async Task CreateDbIfNotExists(IHost host)
+{
+    using (var scope = host.Services.CreateScope())
+    {
+        var services = scope.ServiceProvider;
+        try
+        {
+            var context = services.GetRequiredService<AppDbContext>();
+            await context.Database.MigrateAsync();
+        }
+        catch (Exception ex)
+        {
+            var logger = services.GetRequiredService<ILogger<Program>>();
+            logger.LogError(ex, "An error occurred creating the DB.");
+        }
+    }
+}
 
-// Executa a tarefa de migração sem bloquear a inicialização
-// await CreateDbIfNotExists(app);
+ // Executa a tarefa de migração sem bloquear a inicialização
+ await CreateDbIfNotExists(app);
 
 // Middleware
 app.UseSwagger();
@@ -70,6 +70,4 @@ app.UseSwaggerUI();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
-// Endpoint de saúde para teste
-app.MapGet("/", () => "API is running!");
 app.Run();
