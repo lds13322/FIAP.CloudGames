@@ -17,8 +17,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<GameService>();
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite("Data Source=/home/app.db"));
+    options.UseSqlServer(connectionString));
 
 builder.Services.AddSwaggerGen(c =>
 {

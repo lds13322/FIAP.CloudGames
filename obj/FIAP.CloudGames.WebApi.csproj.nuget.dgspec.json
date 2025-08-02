@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lucas.dossantos_rede\\Desktop\\FIAP - Projeto\\FIAP.CloudGames_ProjetoBase\\WebApi\\FIAP.CloudGames.WebApi.csproj": {}
+    "C:\\Users\\lucas\\Documents\\FIAP.CloudGames\\FIAP.CloudGames.WebApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lucas.dossantos_rede\\Desktop\\FIAP - Projeto\\FIAP.CloudGames_ProjetoBase\\WebApi\\FIAP.CloudGames.WebApi.csproj": {
+    "C:\\Users\\lucas\\Documents\\FIAP.CloudGames\\FIAP.CloudGames.WebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lucas.dossantos_rede\\Desktop\\FIAP - Projeto\\FIAP.CloudGames_ProjetoBase\\WebApi\\FIAP.CloudGames.WebApi.csproj",
+        "projectUniqueName": "C:\\Users\\lucas\\Documents\\FIAP.CloudGames\\FIAP.CloudGames.WebApi.csproj",
         "projectName": "FIAP.CloudGames.WebApi",
-        "projectPath": "C:\\Users\\lucas.dossantos_rede\\Desktop\\FIAP - Projeto\\FIAP.CloudGames_ProjetoBase\\WebApi\\FIAP.CloudGames.WebApi.csproj",
-        "packagesPath": "C:\\Users\\lucas.dossantos_rede\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lucas.dossantos_rede\\Desktop\\FIAP - Projeto\\FIAP.CloudGames_ProjetoBase\\WebApi\\obj\\",
+        "projectPath": "C:\\Users\\lucas\\Documents\\FIAP.CloudGames\\FIAP.CloudGames.WebApi.csproj",
+        "packagesPath": "C:\\Users\\lucas\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\lucas\\Documents\\FIAP.CloudGames\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\lucas.dossantos_rede\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\lucas\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -55,6 +55,10 @@
               "target": "Package",
               "version": "[8.0.0, )"
             },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[9.0.7, )"
+            },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[8.0.0, )"
@@ -83,7 +87,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.410/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.412/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
