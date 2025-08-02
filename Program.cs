@@ -40,6 +40,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 var app = builder.Build();
+// Garante que o banco de dados seja criado/atualizado na inicialização
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>(); // Substitua AppDbContext pelo nome do seu DbContext
+    dbContext.Database.Migrate();
+}
 
 // Middleware
 app.UseSwagger();
