@@ -40,12 +40,27 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 var app = builder.Build();
-// Garante que o banco de dados seja criado/atualizado na inicialização
-using (var scope = app.Services.CreateScope())
+// Garante que o banco de dados seja criado/atualizado de forma assíncrona
+async Task CreateDbIfNotExists(IHost host)
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>(); // Substitua AppDbContext pelo nome do seu DbContext
-    dbContext.Database.Migrate();
+    using (var scope = host.Services.CreateScope())
+    {
+        var services = scope.ServiceProvider;
+        try
+        {
+            var context = services.GetRequiredService<AppDbContext>();
+            await context.Database.MigrateAsync();
+        }
+        catch (Exception ex)
+        {
+            var logger = services.GetRequiredService<ILogger<Program>>();
+            logger.LogError(ex, "An error occurred creating the DB.");
+        }
+    }
 }
+
+// Executa a tarefa de migração sem bloquear a inicialização
+await CreateDbIfNotExists(app);
 
 // Middleware
 app.UseSwagger();
