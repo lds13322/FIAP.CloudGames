@@ -18,7 +18,7 @@ builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<GameService>();
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite("Data Source=app.db")); // ajuste se necessário
+    options.UseSqlite("Data Source=/home/app.db"));
 
 builder.Services.AddSwaggerGen(c =>
 {
