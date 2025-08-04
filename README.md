@@ -1,97 +1,71 @@
-# 🎮 FIAP.CloudGames API
+# 🎮 FIAP.CloudGames API - Fase 2
 
-Projeto desenvolvido individualmente para a **Fase 1 do Tech Challenge de Arquitetura de Sistemas - FIAP Pós Tech**.
+Projeto desenvolvido individualmente para o **Tech Challenge de Arquitetura de Sistemas - FIAP Pós Tech**.
 
 ## 📌 Descrição
 
-API REST para um sistema de jogos digitais, onde usuários podem:
+API REST para um sistema de jogos digitais, onde usuários podem se cadastrar, gerenciar sua biblioteca de jogos e administradores podem gerenciar o catálogo. Esta segunda fase do projeto focou em tornar a aplicação escalável, confiável e monitorável através de práticas DevOps e tecnologias de nuvem.
 
-- Cadastrar-se e autenticar-se via JWT
-- Consultar catálogo de jogos
-- Adicionar jogos à própria biblioteca
-- Consultar sua biblioteca de jogos
-- Admins podem cadastrar novos jogos
+---
+
+## 🏛️ Arquitetura e Fluxo DevOps
+
+O projeto utiliza uma arquitetura moderna baseada em contêineres e um fluxo de CI/CD para automação de builds e deploys.
+
+1.  **Código-fonte:** Versionado no GitHub.
+2.  **CI (Integração Contínua):** O GitHub Actions é acionado a cada `push`. Ele constrói a imagem Docker da aplicação e a envia para o Docker Hub.
+3.  **CD (Entrega Contínua):** Após a conclusão da CI, uma segunda pipeline de GitHub Actions é acionada. Ela se conecta ao Microsoft Azure e realiza o deploy da nova imagem no App Service.
+4.  **Infraestrutura na Nuvem:** A aplicação roda em um **Azure App Service**, garantindo escalabilidade. Os dados são persistidos em um **Azure SQL Database**, um banco de dados gerenciado e robusto.
+5.  **Monitoramento:** O **Azure Application Insights** coleta métricas de performance e falhas da aplicação em tempo real.
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
-- .NET 8
-- ASP.NET Core
-- Entity Framework Core (SQLite)
-- JWT (JSON Web Token)
-- Swagger (documentação e testes)
-- Arquitetura em camadas (Models, Services, Controllers)
+-   **.NET 8** e ASP.NET Core
+-   **Entity Framework Core**
+-   **Docker:** Para containerização da aplicação.
+-   **GitHub Actions:** Para automação de CI/CD.
+-   **Microsoft Azure:**
+    -   **Azure App Service:** Para hospedar a aplicação em contêiner.
+    -   **Azure SQL Database:** Para persistência dos dados em produção.
+    -   **Application Insights:** Para monitoramento e telemetria.
+-   **Docker Hub:** Como registro para as imagens Docker.
+-   **JWT (JSON Web Token):** Para autenticação.
+-   **Swagger:** Para documentação da API.
 
 ---
 
-## 🚀 Como Executar Localmente
+## 🚀 Aplicação na Nuvem
 
-1. **Requisitos**:
-   - .NET SDK 8 instalado
-   - VS Code ou Visual Studio
+A API está publicada e disponível no Azure. Você pode acessar a documentação interativa (Swagger UI) através do seguinte link:
 
-2. **Restaurar pacotes e compilar**:
-   ```bash
-   dotnet restore
-   dotnet build
-   ```
-
-3. **Rodar o projeto**:
-   ```bash
-   dotnet run
-   ```
-
-4. **Acessar o Swagger UI**:
-   ```
-   http://localhost:5000/swagger
-   ```
+**[https://fiap-cloudgames-api-lucas-fubmcvh9e7b7dmc0.brazilsouth-01.azurewebsites.net/swagger/index.html](https://fiap-cloudgames-api-lucas-fubmcvh9e7b7dmc0.brazilsouth-01.azurewebsites.net/swagger/index.html)**
 
 ---
 
-## 🔐 Testando a Autenticação
+## ⚙️ Como Executar Localmente
 
-### 1. Cadastrar um usuário:
-```json
-POST /api/users/register
-{
-  "name": "Lucas",
-  "email": "",
-  "password": "",
-  "role": "Admin"
-}
-```
+*(Pode manter as instruções que você já tinha para rodar localmente com `dotnet run` ou adicionar as de Docker)*
 
-### 2. Fazer login:
-```json
-POST /api/users/login
-{
-  "email": "",
-  "password": ""
-}
-```
-
-🔁 Copie o token JWT retornado e clique em "Authorize" no Swagger para testar endpoints protegidos.
-
----
-
-## 🧪 Endpoints Principais
-
-- `POST /api/users/register` - Cadastrar usuário
-- `POST /api/users/login` - Login com JWT
-- `POST /api/game` - Adicionar jogo (Admin)
-- `GET /api/game` - Listar jogos
-- `POST /api/game/add/{gameId}` - Adicionar jogo à biblioteca
-- `GET /api/game/library` - Ver biblioteca do usuário
+1.  **Requisitos**:
+    -   .NET SDK 8 instalado
+    -   Docker Desktop instalado
+2.  **Construir a imagem Docker**:
+    ```bash
+    docker build -t fiap-cloudgames-api .
+    ```
+3.  **Rodar o contêiner**:
+    ```bash
+    # (Atenção: A conexão com o banco de dados precisará ser ajustada para o ambiente local)
+    docker run -p 5000:8080 fiap-cloudgames-api
+    ```
 
 ---
 
 ## 👤 Autor
 
-**Lucas dos Santos**  
+**Lucas dos Santos**
 Discord: `lds133`
 
 ---
-
-## 🎓 FIAP Pós Tech  
-Arquitetura de Sistemas · Tech Challenge Fase 1
