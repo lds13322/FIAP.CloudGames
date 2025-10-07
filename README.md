@@ -12,8 +12,8 @@ Esta é a terceira fase do projeto **FIAP Cloud Games**, focada na evolução de
 
 A solução foi desacoplada em uma API Web, que serve como porta de entrada para os usuários (frontend), e um Worker Service de background, que processa tarefas assíncronas. A comunicação entre eles é feita através de um barramento de serviço na nuvem.
 
-**[⚠️ AÇÃO: INSERIR A IMAGEM DO SEU DIAGRAMA DE ARQUITETURA AQUI! ⚠️]**
-*(Tire um print do diagrama que fizemos no diagrams.net e coloque o arquivo na raiz do projeto para poder exibi-lo aqui).*
+<img width="240" height="693" alt="image" src="https://github.com/user-attachments/assets/a0b1b82a-3c1a-4bc8-af97-9c4f441ab487" />
+
 
 ### Fluxo Principal (Simulação de Compra)
 
@@ -50,7 +50,7 @@ A solução foi desacoplada em uma API Web, que serve como porta de entrada para
 As aplicações foram publicadas de forma independente no Azure:
 
 -   **API de Jogos (App Service):** A documentação interativa (Swagger UI) pode ser acessada em:
-    **https://fiap-cloudgames-api-lucas-fubmcvh9e7b7dmc0.brazilsouth-01.azurewebsites.net/swagger/index.html**
+    **(https://fiap-cloudgames-api-lucas-fiubmcvkhle7bi7.brazilsouth-01.azurewebsites.net/swagger/index.html)**
 
 -   **Worker de Pagamentos (Container App):** Este é um serviço de background e não possui uma interface pública. Seu funcionamento pode ser acompanhado através dos logs em tempo real (`Log Stream`) no Portal Azure.
 
