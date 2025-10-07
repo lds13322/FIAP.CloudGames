@@ -50,7 +50,7 @@ A solução foi desacoplada em uma API Web, que serve como porta de entrada para
 As aplicações foram publicadas de forma independente no Azure:
 
 -   **API de Jogos (App Service):** A documentação interativa (Swagger UI) pode ser acessada em:
-    **[https://fiap-cloudgames-api-lucas-fiubmcvkhle7bi7.brazilsouth-01.azurewebsites.net/swagger/index.html](https://fiap-cloudgames-api-lucas-fiubmcvkhle7bi7.brazilsouth-01.azurewebsites.net/swagger/index.html)**
+    **[[https://fiap-cloudgames-api-lucas-fiubmcvkhle7bi7.brazilsouth-01.azurewebsites.net/swagger/index.html](https://fiap-cloudgames-api-lucas-fiubmcvkhle7bi7.brazilsouth-01.azurewebsites.net/swagger/index.html)](https://fiap-cloudgames-api-lucas-fubmcvh9e7b7dmc0.brazilsouth-01.azurewebsites.net/swagger/index.html)**
 
 -   **Worker de Pagamentos (Container App):** Este é um serviço de background e não possui uma interface pública. Seu funcionamento pode ser acompanhado através dos logs em tempo real (`Log Stream`) no Portal Azure.
 
