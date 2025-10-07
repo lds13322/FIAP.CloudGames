@@ -1,65 +1,77 @@
-# 🎮 FIAP.CloudGames API - Fase 2
+# 🎮 FIAP - Tech Challenge 3: Arquitetura de Microsserviços
 
 Projeto desenvolvido individualmente para o **Tech Challenge de Arquitetura de Sistemas - FIAP Pós Tech**.
 
 ## 📌 Descrição
 
-API REST para um sistema de jogos digitais, onde usuários podem se cadastrar, gerenciar sua biblioteca de jogos e administradores podem gerenciar o catálogo. Esta segunda fase do projeto focou em tornar a aplicação escalável, confiável e monitorável através de práticas DevOps e tecnologias de nuvem.
+Esta é a terceira fase do projeto **FIAP Cloud Games**, focada na evolução de uma aplicação monolítica para uma arquitetura distribuída baseada em **microsserviços**. O objetivo foi refatorar a API REST original, separando-a em serviços independentes que se comunicam de forma assíncrona, garantindo maior escalabilidade, resiliência e observabilidade para a solução.
 
 ---
 
-## 🏛️ Arquitetura e Fluxo DevOps
+## 🏛️ Arquitetura Desenhada
 
-O projeto utiliza uma arquitetura moderna baseada em contêineres e um fluxo de CI/CD para automação de builds e deploys.
+A solução foi desacoplada em uma API Web, que serve como porta de entrada para os usuários (frontend), e um Worker Service de background, que processa tarefas assíncronas. A comunicação entre eles é feita através de um barramento de serviço na nuvem.
 
-1.  **Código-fonte:** Versionado no GitHub.
-2.  **CI (Integração Contínua):** O GitHub Actions é acionado a cada `push`. Ele constrói a imagem Docker da aplicação e a envia para o Docker Hub.
-3.  **CD (Entrega Contínua):** Após a conclusão da CI, uma segunda pipeline de GitHub Actions é acionada. Ela se conecta ao Microsoft Azure e realiza o deploy da nova imagem no App Service.
-4.  **Infraestrutura na Nuvem:** A aplicação roda em um **Azure App Service**, garantindo escalabilidade. Os dados são persistidos em um **Azure SQL Database**, um banco de dados gerenciado e robusto.
-5.  **Monitoramento:** O **Azure Application Insights** coleta métricas de performance e falhas da aplicação em tempo real.
+**[⚠️ AÇÃO: INSERIR A IMAGEM DO SEU DIAGRAMA DE ARQUITETURA AQUI! ⚠️]**
+*(Tire um print do diagrama que fizemos no diagrams.net e coloque o arquivo na raiz do projeto para poder exibi-lo aqui).*
+
+### Fluxo Principal (Simulação de Compra)
+
+1.  O usuário, autenticado via JWT, faz uma requisição HTTP para a **API de Jogos** (hospedada no Azure App Service).
+2.  A API valida a requisição e publica um evento `PedidoDeCompraIniciado` em uma fila no **Azure Service Bus**.
+3.  O **Worker de Pagamentos** (hospedado no Azure Container Apps), que está constantemente escutando a fila, consome a mensagem do evento.
+4.  O Worker simula o processamento do pagamento e registra logs da operação.
+5.  Toda a transação, desde a chamada na API até o processamento no Worker, é monitorada de ponta a ponta com **Azure Application Insights**, utilizando rastreamento distribuído para correlacionar as operações.
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
--   **.NET 8** e ASP.NET Core
--   **Entity Framework Core**
--   **Docker:** Para containerização da aplicação.
--   **GitHub Actions:** Para automação de CI/CD.
--   **Microsoft Azure:**
-    -   **Azure App Service:** Para hospedar a aplicação em contêiner.
-    -   **Azure SQL Database:** Para persistência dos dados em produção.
-    -   **Application Insights:** Para monitoramento e telemetria.
--   **Docker Hub:** Como registro para as imagens Docker.
--   **JWT (JSON Web Token):** Para autenticação.
--   **Swagger:** Para documentação da API.
+-   **.NET 8**:
+    -   ASP.NET Core (para a Web API)
+    -   Worker Service (para o serviço de background)
+-   **Entity Framework Core**: Para acesso a dados.
+-   **Arquitetura**: Microsserviços, API REST, Mensageria, Event-Driven.
+-   **Containerização**: Docker.
+-   **Microsoft Azure**:
+    -   **Azure App Service**: Para hospedar a Web API.
+    -   **Azure Container Apps**: Para hospedar o Worker Service em contêiner.
+    -   **Azure SQL Database**: Banco de dados relacional gerenciado.
+    -   **Azure Service Bus**: Para comunicação assíncrona via filas.
+    -   **Azure Application Insights**: Para monitoramento, logs e rastreamento distribuído.
+    -   **Azure Container Registry**: Para armazenamento das imagens Docker.
+-   **Autenticação**: JWT (JSON Web Token).
+-   **DevOps**: Git, GitHub, Azure CLI.
 
 ---
 
-## 🚀 Aplicação na Nuvem
+## 🚀 Aplicações na Nuvem
 
-A API está publicada e disponível no Azure. Você pode acessar a documentação interativa (Swagger UI) através do seguinte link:
+As aplicações foram publicadas de forma independente no Azure:
 
-**[https://fiap-cloudgames-api-lucas-fubmcvh9e7b7dmc0.brazilsouth-01.azurewebsites.net/swagger/index.html](https://fiap-cloudgames-api-lucas-fubmcvh9e7b7dmc0.brazilsouth-01.azurewebsites.net/swagger/index.html)**
+-   **API de Jogos (App Service):** A documentação interativa (Swagger UI) pode ser acessada em:
+    **[https://fiap-cloudgames-api-lucas-fiubmcvkhle7bi7.brazilsouth-01.azurewebsites.net/swagger/index.html](https://fiap-cloudgames-api-lucas-fiubmcvkhle7bi7.brazilsouth-01.azurewebsites.net/swagger/index.html)**
+
+-   **Worker de Pagamentos (Container App):** Este é um serviço de background e não possui uma interface pública. Seu funcionamento pode ser acompanhado através dos logs em tempo real (`Log Stream`) no Portal Azure.
 
 ---
 
 ## ⚙️ Como Executar Localmente
 
-*(Pode manter as instruções que você já tinha para rodar localmente com `dotnet run` ou adicionar as de Docker)*
+O projeto está configurado para ser executado com um único comando no Visual Studio Code.
 
 1.  **Requisitos**:
-    -   .NET SDK 8 instalado
-    -   Docker Desktop instalado
-2.  **Construir a imagem Docker**:
-    ```bash
-    docker build -t fiap-cloudgames-api .
-    ```
-3.  **Rodar o contêiner**:
-    ```bash
-    # (Atenção: A conexão com o banco de dados precisará ser ajustada para o ambiente local)
-    docker run -p 5000:8080 fiap-cloudgames-api
-    ```
+    -   .NET SDK 8 instalado.
+    -   Azure CLI.
+    -   Docker Desktop (opcional, para builds locais).
+2.  **Configuração**:
+    -   Clone o repositório.
+    -   Configure os segredos nos arquivos `appsettings.json` de cada projeto (Connection Strings do Azure SQL, Service Bus e Application Insights).
+3.  **Execução**:
+    -   Abra a pasta raiz da solução (`FIAP_CloudGames_Solution`) no VS Code.
+    -   Vá para a aba "Run and Debug" (Executar e Depurar).
+    -   Selecione a opção **"Rodar Todos os Microsserviços"** no menu dropdown.
+    -   Pressione **F5** para iniciar. Os dois projetos serão compilados e iniciados simultaneamente.
 
 ---
 
@@ -67,5 +79,3 @@ A API está publicada e disponível no Azure. Você pode acessar a documentaçã
 
 **Lucas dos Santos**
 Discord: `lds133`
-
----
