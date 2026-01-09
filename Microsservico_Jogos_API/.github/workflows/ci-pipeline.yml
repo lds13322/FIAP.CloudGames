@@ -1,0 +1,33 @@
+name: CI - Build and Push Docker Image
+
+# Gatilho: Roda em push para qualquer branch, exceto a 'main', e em Pull Requests para a 'main'
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest # A pipeline vai rodar em uma máquina virtual Linux (Ubuntu)
+
+    steps:
+      # Passo 1: Clona o repositório para dentro da máquina virtual da pipeline
+      - name: Checkout do Código
+        uses: actions/checkout@v4
+
+      # Passo 2: Faz o login no Docker Hub usando os segredos que configuramos
+      - name: Login no Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # Passo 3: Constrói a imagem Docker e envia para o Docker Hub
+      - name: Build e Push da Imagem Docker
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          # Cria uma tag única para a imagem usando o ID do commit
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/fiap-cloudgames-api:${{ github.sha }}

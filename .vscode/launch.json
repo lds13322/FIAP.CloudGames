@@ -1,0 +1,46 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Lançar API de Jogos",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/Microsservico_Jogos_API/bin/Debug/net8.0/FIAP.CloudGames.WebApi.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Microsservico_Jogos_API",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "Lançar Worker de Pagamentos",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/Microsservico_Pagamentos_Worker/bin/Debug/net8.0/FIAP.CloudGames.Pagamentos.Worker.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Microsservico_Pagamentos_Worker",
+            "stopAtEntry": false,
+            "console": "internalConsole",
+            "env": {
+                "DOTNET_ENVIRONMENT": "Development"
+            }
+        }
+    ],
+    // --- PARTE FALTANTE ADICIONADA AQUI ---
+    "compounds": [
+        {
+            "name": "Rodar Todos os Microsserviços",
+            "configurations": [
+                "Lançar API de Jogos",
+                "Lançar Worker de Pagamentos"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIAP.CloudGames.WebApi", "Microsservico_Jogos_API\FIAP.CloudGames.WebApi.csproj", "{513BBF1B-70DF-4F3C-BDAB-5E20C2BC2E7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIAP.CloudGames.Pagamentos.Worker", "Microsservico_Pagamentos_Worker\FIAP.CloudGames.Pagamentos.Worker.csproj", "{ACF56116-ADE3-4F9C-8390-497B7E057BDB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{513BBF1B-70DF-4F3C-BDAB-5E20C2BC2E7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{513BBF1B-70DF-4F3C-BDAB-5E20C2BC2E7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{513BBF1B-70DF-4F3C-BDAB-5E20C2BC2E7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{513BBF1B-70DF-4F3C-BDAB-5E20C2BC2E7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACF56116-ADE3-4F9C-8390-497B7E057BDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACF56116-ADE3-4F9C-8390-497B7E057BDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACF56116-ADE3-4F9C-8390-497B7E057BDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACF56116-ADE3-4F9C-8390-497B7E057BDB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,27 @@
+name: CD - Deploy to Azure App Service
+
+# Gatilho: Roda toda vez que a pipeline de CI for concluída com sucesso:
+on:
+  workflow_run:
+    workflows: ["CI - Build and Push Docker Image"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    # Só executa se a pipeline de CI teve sucesso
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      # Passo 1: Baixa o código (necessário para pegar o nome da imagem)
+      - name: Checkout do Código
+        uses: actions/checkout@v4
+
+      # Passo 2: Faz o deploy no Azure App Service
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'fiap-cloudgames-api-lucas' # O nome do App Service
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          images: 'lds13322/fiap-cloudgames-api:latest' # O nome da imagem no Docker Hub

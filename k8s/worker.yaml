@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fiap-games-worker-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fiap-games-worker
+  template:
+    metadata:
+      labels:
+        app: fiap-games-worker
+    spec:
+      containers:
+      - name: fiap-games-worker
+        image: acrfiaplucas.azurecr.io/fiap-games-worker:latest
+        env:
+        - name: ConnectionStrings__RabbitMq
+          value: "amqp://guest:guest@rabbitmq-service:5672"
