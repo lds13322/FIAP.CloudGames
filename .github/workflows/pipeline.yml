@@ -1,0 +1,29 @@
+name: AgroSolutions CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout do código
+      uses: actions/checkout@v3
+
+    - name: Setup .NET 8
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Restaurar dependências
+      run: dotnet restore AgroSolutions.sln
+
+    - name: Build da Solução
+      run: dotnet build AgroSolutions.sln --no-restore --configuration Release
+
+    - name: Executar Testes Unitários
+      run: dotnet test AgroSolutions.Tests/AgroSolutions.Tests.csproj --no-build --verbosity normal

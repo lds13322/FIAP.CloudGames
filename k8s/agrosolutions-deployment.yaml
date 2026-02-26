@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ingestion-service-deployment
+  labels:
+    app: agrosolutions-ingestion
+spec:
+  replicas: 2 # Mostra escalabilidade!
+  selector:
+    matchLabels:
+      app: agrosolutions-ingestion
+  template:
+    metadata:
+      labels:
+        app: agrosolutions-ingestion
+    spec:
+      containers:
+      - name: ingestion-api
+        image: agrosolutions/ingestion-service:latest
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ingestion-service-lb
+spec:
+  type: LoadBalancer # Expõe a API
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: agrosolutions-ingestion

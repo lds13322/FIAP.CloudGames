@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # Banco de Dados (PostgreSQL - leve e excelente para Microsserviços)
+  postgres_db:
+    image: postgres:15
+    container_name: agrosolutions_postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: adminpassword
+      POSTGRES_DB: agrosolutions_db
+    ports:
+      - "5432:5432"
+    restart: always
+
+  # Mensageria (RabbitMQ com painel de gerenciamento)
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: agrosolutions_rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"   # Porta de comunicação da API
+      - "15672:15672" # Porta do painel visual (UI)
+    restart: always
+
+  # Observabilidade - Coletor de Métricas
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: agrosolutions_prometheus
+    ports:
+      - "9090:9090"
+    restart: always
+
+  # Observabilidade - Dashboard de Monitoramento
+  grafana:
+    image: grafana/grafana:latest
+    container_name: agrosolutions_grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    ports:
+      - "3000:3000"
+    restart: always
