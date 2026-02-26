@@ -26,4 +26,4 @@ jobs:
       run: dotnet build AgroSolutions.sln --no-restore --configuration Release
 
     - name: Executar Testes Unitários
-      run: dotnet test AgroSolutions.Tests/AgroSolutions.Tests.csproj --no-build --verbosity normal
+      run: dotnet test AgroSolutions.Tests/AgroSolutions.Tests.csproj --no-build --configuration Release --verbosity normal
